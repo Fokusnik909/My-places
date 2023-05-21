@@ -13,6 +13,7 @@
 		C84C040A2A18D56300A8C145 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C84C04092A18D56300A8C145 /* Assets.xcassets */; };
 		C84C040D2A18D56300A8C145 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C84C040B2A18D56300A8C145 /* LaunchScreen.storyboard */; };
 		C84C04152A18DA4300A8C145 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84C04142A18DA4300A8C145 /* MainTableViewController.swift */; };
+		C84C04172A1A2B7500A8C145 /* CastomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84C04162A1A2B7500A8C145 /* CastomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C84C040C2A18D56300A8C145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C84C040E2A18D56300A8C145 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C84C04142A18DA4300A8C145 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		C84C04162A1A2B7500A8C145 /* CastomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				C84C04022A18D56200A8C145 /* SceneDelegate.swift */,
 				C84C04062A18D56200A8C145 /* Main.storyboard */,
 				C84C04142A18DA4300A8C145 /* MainTableViewController.swift */,
+				C84C04162A1A2B7500A8C145 /* CastomTableViewCell.swift */,
 				C84C04092A18D56300A8C145 /* Assets.xcassets */,
 				C84C040B2A18D56300A8C145 /* LaunchScreen.storyboard */,
 				C84C040E2A18D56300A8C145 /* Info.plist */,
@@ -140,6 +143,7 @@
 			files = (
 				C84C04012A18D56200A8C145 /* AppDelegate.swift in Sources */,
 				C84C04152A18DA4300A8C145 /* MainTableViewController.swift in Sources */,
+				C84C04172A1A2B7500A8C145 /* CastomTableViewCell.swift in Sources */,
 				C84C04032A18D56200A8C145 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
