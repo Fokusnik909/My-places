@@ -6,58 +6,83 @@
 //
 
 import UIKit
+import RealmSwift
 
-class MainTableViewController: UITableViewController {
-
+class MainTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var places: Results<Place>!
+    private var filterdPlaces: Results<Place>!
+    private var ascendingSorting = true
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else {return false}
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
-    
-    var places = Place.getPlaces()
-    
-    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var reversedSortingButton: UIBarButtonItem!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        places = realm.objects(Place.self)
+        
+        //Setup the search controller
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        self.searchController.searchBar.isHidden = false
+        self.tableView.tableHeaderView = nil
     }
 
     // MARK: - Table view data source
 
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return places.count
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         if isFiltering {
+            return filterdPlaces.count
+         }
+        return places.isEmpty ? 0 : places.count
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CastomTableViewCell
 
-        let place = places[indexPath.row]
-        
+        var place = Place()
+         
+         if isFiltering {
+             place = filterdPlaces[indexPath.row]
+         }else {
+             place = places[indexPath.row]
+         }
+
+
         cell.nameLabel?.text = place.name
         cell.locationLabel.text = place.location
         cell.typeLabel.text = place.type
-        
-        if place.image == nil {
-            cell.imageOfPlace?.image = UIImage(named: place.restaurantImage!)
-        }else {
-            cell.imageOfPlace.image = place.image
-        }
-        
-        
-        
+        cell.imageOfPlace.image = UIImage(data: place.imageData!)
+
+
+
         cell.imageOfPlace?.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
         cell.imageOfPlace?.clipsToBounds = true
-    
+
         return cell
     }
     
     
     @IBAction func unwinSegue(_ segue: UIStoryboardSegue){
         guard let newPlaceVC = segue.source as? NewPlaceTableViewController else {return}
-        newPlaceVC.saveNewPlace()
-        places.append(newPlaceVC.newPlace!)
+        newPlaceVC.savePlace()
         tableView.reloadData()
     }
     
@@ -65,18 +90,76 @@ class MainTableViewController: UITableViewController {
     // MARK - Table view delegate
     
     
+    // Delete object
+    
+     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let place = places[indexPath.row]
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { _, _  in
+            StorageManager.deleteObject(place)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        return [deleteAction]
+    }
+    
    
 
 
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetail"{
+            guard let indexPath = tableView.indexPathForSelectedRow else {return}
+            let place: Place
+            if isFiltering {
+                place = filterdPlaces[indexPath.row]
+            }else {
+                place = places[indexPath.row]
+            }
+            let newPlaceVC = segue.destination as! NewPlaceTableViewController
+            newPlaceVC.currentPlace = place
+        }
     }
-    */
+    
+    
+    @IBAction func sortSelection(_ sender: UISegmentedControl) {
+       sorting()
+    }
+    
+    @IBAction func reversedSorting(_ sender: Any) {
+        ascendingSorting.toggle()
+        
+        if ascendingSorting {
+            reversedSortingButton.image = UIImage(named: "AZ")
+        }else {
+            reversedSortingButton.image = UIImage(named: "ZA")
+        }
+        sorting()
+    }
+    
+    private func sorting() {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            places = places.sorted(byKeyPath: "date", ascending: ascendingSorting)
+        }else {
+            places = places.sorted(byKeyPath: "name", ascending: ascendingSorting)
+        }
+        tableView.reloadData()
+    }
+    
+}
 
+extension MainTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    private func filterContentForSearchText(_ searchText: String){
+        
+        
+        filterdPlaces = places.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText,searchText)
+        
+        tableView.reloadData()
+    }
+    
 }
