@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class NewPlaceTableViewController: UITableViewController {
 
@@ -13,12 +14,14 @@ class NewPlaceTableViewController: UITableViewController {
     @IBOutlet weak var ratingControl: RatingControl!
     var currentPlace: Place!
     var imageIsChange = false
+    var currentRanting = 0.0
     
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
+    @IBOutlet weak var cosmosView: CosmosView!
     
     
     
@@ -33,6 +36,12 @@ class NewPlaceTableViewController: UITableViewController {
         saveButton.isEnabled = false
         placeName.addTarget(self, action: #selector(tfChanged), for: .editingChanged)
         setupEditScreen()
+        cosmosView.settings.fillMode = .half
+        
+        cosmosView.didTouchCosmos = { rating in
+            self.currentRanting = rating
+        }
+        
     }
 
     
@@ -82,7 +91,7 @@ class NewPlaceTableViewController: UITableViewController {
         
         let newPlace = Place(name: placeName.text!,
                              location: placeLocation.text, type: placeType.text, imageData: imageData,
-                             rating: Double(ratingControl.rating) )
+                             rating: currentRanting )
         
         if currentPlace != nil {
             try! realm.write {
@@ -109,7 +118,7 @@ class NewPlaceTableViewController: UITableViewController {
             placeName.text = currentPlace?.name
             placeLocation.text = currentPlace?.location
             placeType.text = currentPlace?.type
-            ratingControl.rating = Int(currentPlace.rating)
+            cosmosView.rating = currentPlace.rating
            
         }
     }
