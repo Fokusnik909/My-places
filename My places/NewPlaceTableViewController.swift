@@ -10,7 +10,8 @@ import UIKit
 class NewPlaceTableViewController: UITableViewController {
 
     
-    var currentPlace: Place?
+    @IBOutlet weak var ratingControl: RatingControl!
+    var currentPlace: Place!
     var imageIsChange = false
     
     @IBOutlet weak var placeImage: UIImageView!
@@ -25,7 +26,10 @@ class NewPlaceTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView(frame:CGRect(x: 0,
+                                                        y: 0,
+                                                        width: tableView.frame.size.width,
+                                                        height: 1.0))
         saveButton.isEnabled = false
         placeName.addTarget(self, action: #selector(tfChanged), for: .editingChanged)
         setupEditScreen()
@@ -77,7 +81,8 @@ class NewPlaceTableViewController: UITableViewController {
         let imageData = image?.pngData()
         
         let newPlace = Place(name: placeName.text!,
-                             location: placeLocation.text, type: placeType.text, imageData: imageData)
+                             location: placeLocation.text, type: placeType.text, imageData: imageData,
+                             rating: Double(ratingControl.rating) )
         
         if currentPlace != nil {
             try! realm.write {
@@ -85,6 +90,7 @@ class NewPlaceTableViewController: UITableViewController {
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = newPlace.imageData
+                currentPlace?.rating = newPlace.rating
             }
         }else {
             StorageManager.saveObject(newPlace)
@@ -103,6 +109,8 @@ class NewPlaceTableViewController: UITableViewController {
             placeName.text = currentPlace?.name
             placeLocation.text = currentPlace?.location
             placeType.text = currentPlace?.type
+            ratingControl.rating = Int(currentPlace.rating)
+           
         }
     }
     

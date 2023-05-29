@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		766D368EC4EAF3499B8205FF /* Pods_My_places.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793FEFF7312E9089352D0114 /* Pods_My_places.framework */; };
+		C834CDED2A2248C900224412 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C834CDEC2A2248C900224412 /* RatingControl.swift */; };
 		C84C04012A18D56200A8C145 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84C04002A18D56200A8C145 /* AppDelegate.swift */; };
 		C84C04032A18D56200A8C145 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84C04022A18D56200A8C145 /* SceneDelegate.swift */; };
 		C84C04082A18D56200A8C145 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C84C04062A18D56200A8C145 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		2E7D6B422265F7E8E755C6F0 /* Pods-My places.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My places.debug.xcconfig"; path = "Target Support Files/Pods-My places/Pods-My places.debug.xcconfig"; sourceTree = "<group>"; };
 		468B8B2F87837A5C3F2B6EB7 /* Pods-My places.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My places.release.xcconfig"; path = "Target Support Files/Pods-My places/Pods-My places.release.xcconfig"; sourceTree = "<group>"; };
 		793FEFF7312E9089352D0114 /* Pods_My_places.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_places.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C834CDEC2A2248C900224412 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		C84C03FD2A18D56200A8C145 /* My places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My places.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84C04002A18D56200A8C145 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C84C04022A18D56200A8C145 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				C84C04182A1A33A400A8C145 /* PlaceModel.swift */,
 				C8A958942A1CD45B007411AA /* StorageManager.swift */,
 				C84C04162A1A2B7500A8C145 /* CastomTableViewCell.swift */,
+				C834CDEC2A2248C900224412 /* RatingControl.swift */,
 				C84C04092A18D56300A8C145 /* Assets.xcassets */,
 				C84C040B2A18D56300A8C145 /* LaunchScreen.storyboard */,
 				C84C040E2A18D56300A8C145 /* Info.plist */,
@@ -222,6 +225,7 @@
 				C84C04012A18D56200A8C145 /* AppDelegate.swift in Sources */,
 				C84C04152A18DA4300A8C145 /* MainTableViewController.swift in Sources */,
 				C8A958952A1CD45B007411AA /* StorageManager.swift in Sources */,
+				C834CDED2A2248C900224412 /* RatingControl.swift in Sources */,
 				C84C04192A1A33A400A8C145 /* PlaceModel.swift in Sources */,
 				C84C04172A1A2B7500A8C145 /* CastomTableViewCell.swift in Sources */,
 				C84C04032A18D56200A8C145 /* SceneDelegate.swift in Sources */,

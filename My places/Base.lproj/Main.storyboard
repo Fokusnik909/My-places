@@ -84,6 +84,9 @@
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sLG-dO-4I6">
                                 <rect key="frame" x="0.0" y="92" width="414" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="9cP-D7-lDq"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Date"/>
                                     <segment title="Name"/>
@@ -104,7 +107,6 @@
                             <constraint firstItem="2Ev-iy-qz2" firstAttribute="leading" secondItem="sLE-Nm-lAe" secondAttribute="leading" id="YoP-c0-8Ug"/>
                             <constraint firstAttribute="bottom" secondItem="2Ev-iy-qz2" secondAttribute="bottom" id="eUh-VP-HwF"/>
                             <constraint firstItem="sLG-dO-4I6" firstAttribute="leading" secondItem="sLE-Nm-lAe" secondAttribute="leading" id="gnf-fe-0pB"/>
-                            <constraint firstItem="2Ev-iy-qz2" firstAttribute="top" secondItem="r79-PU-Bz0" secondAttribute="top" constant="124" id="iys-gV-Wzb"/>
                             <constraint firstItem="sLG-dO-4I6" firstAttribute="trailing" secondItem="sLE-Nm-lAe" secondAttribute="trailing" id="rBQ-2W-Hlz"/>
                             <constraint firstItem="sLG-dO-4I6" firstAttribute="trailing" secondItem="sLE-Nm-lAe" secondAttribute="trailing" id="uCD-vp-Nlc"/>
                         </constraints>
@@ -277,6 +279,24 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="140" id="4E8-4x-M0W">
+                                        <rect key="frame" x="0.0" y="525" width="414" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4E8-4x-M0W" id="ffB-M4-jVV">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="252" placeholderIntrinsicHeight="44" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ibI-v4-HC3" customClass="RatingControl" customModule="My_places" customModuleProvider="target">
+                                                    <rect key="frame" x="81" y="48" width="252" height="44"/>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ibI-v4-HC3" firstAttribute="centerY" secondItem="ffB-M4-jVV" secondAttribute="centerY" id="Kcr-sm-oDf"/>
+                                                <constraint firstItem="ibI-v4-HC3" firstAttribute="centerX" secondItem="ffB-M4-jVV" secondAttribute="centerX" id="X7a-fc-F4o"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="205" minY="0.0" maxX="205" maxY="0.0"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -302,6 +322,7 @@
                         <outlet property="placeLocation" destination="x4x-u2-ycE" id="sBG-Oa-03J"/>
                         <outlet property="placeName" destination="j73-gW-cMZ" id="5S1-Fp-TYV"/>
                         <outlet property="placeType" destination="b7V-Pc-AZv" id="Sv2-lq-Ibp"/>
+                        <outlet property="ratingControl" destination="ibI-v4-HC3" id="oGM-Lm-NGb"/>
                         <outlet property="saveButton" destination="TJW-mC-Oqg" id="z8U-1G-XYf"/>
                     </connections>
                 </tableViewController>
@@ -348,6 +369,11 @@
             <point key="canvasLocation" x="1549" y="-777"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="ibI-v4-HC3">
+            <size key="intrinsicContentSize" width="252" height="44"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="3iy-2X-AwE"/>
     </inferredMetricsTieBreakers>

@@ -41,7 +41,16 @@ class MainTableViewController: UIViewController, UITableViewDelegate, UITableVie
         definesPresentationContext = true
         self.searchController.searchBar.isHidden = false
         self.tableView.tableHeaderView = nil
+        
     }
+    
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        if navigationItem.searchController == nil {
+//            navigationItem.searchController = searchController
+//        }
+//    }
 
     // MARK: - Table view data source
 
@@ -101,7 +110,11 @@ class MainTableViewController: UIViewController, UITableViewDelegate, UITableVie
         return [deleteAction]
     }
     
-   
+    //
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
 
 
